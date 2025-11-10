@@ -1,0 +1,44 @@
+org: sllanos099
+service: api-alumnos
+
+provider:
+  name: aws
+  runtime: python3.12
+  timeout: 30  
+  iam:
+    role: arn:aws:iam::181214753833:role/LabRole
+
+functions:
+  CrearAlumno:
+    handler: CrearAlumno.lambda_handler
+    events:
+      - http:
+          path: alumno
+          method: post
+          cors: true
+
+  ModificarAlumno:
+    handler: ModificarAlumno.lambda_handler
+    events:
+      - http:
+          path: alumno
+          method: put
+          cors: true
+
+  EliminarAlumno:
+    handler: EliminarAlumno.lambda_handler
+    events:
+      - http:
+          path: alumno/{id}
+          method: delete
+          cors: true
+
+  BuscarAlumno:
+    handler: BuscarAlumno.lambda_handler
+    events:
+      - http:
+          path: alumno/{id}
+          method: get
+          cors: true
+
+
